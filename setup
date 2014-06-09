@@ -71,12 +71,12 @@ update_self()
 	if [ -d /opt/arminarm/tools ]; then
 		echo "Directory exists: updating"
 		cd src
-		cp -r tools /opt/arminarm/
+		sudo cp -r tools /opt/arminarm/
 		cd ..
 	else
 		echo "Tools don't exist: installing"
 		cd src
-		cp -r tools /opt/arminarm/
+		sudo cp -r tools /opt/arminarm/
 		cd ..
 	fi
 	
