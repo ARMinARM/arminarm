@@ -1,0 +1,6 @@
+bin/arm-toolchain-bin*
+bin/espruino_*
+
+src/esp-cli/
+src/Espruino/
+src/stlink/

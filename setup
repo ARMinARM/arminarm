@@ -37,6 +37,14 @@ update_espruino()
 	cd ..
 }
 
+release_serial()
+{
+	echo "RELEASE SERIAL"
+	cd scripts
+	./release_serial.sh
+	cd ..
+}
+
 update_self()
 {
 	echo "UPDATE SELF"
@@ -77,9 +85,10 @@ show_options()
 	echo "#############################################################"
 	echo ""
 	echo "	1)	Update/Install ARMinARM Toolchain"
-	echo "	2)	Update/Install Espruino Source code"
-	echo "	3)	Update/Install esp-cli"
-	echo "	4)	Clean up"
+	echo "	2)	Release Serial port /dev/ttyAMA0"
+	echo "	3)	Update/Install Espruino Source code"
+	echo "	4)	Update/Install esp-cli"
+	echo "	5)	Clean up"
 	echo ""
 	echo "	q)	Quit"
 	echo ""
@@ -100,10 +109,12 @@ while [ "$OPTION" != "q" ]; do
 		OPTION="q"
 		echo "Updated. Please run setup again."
 	elif [ "$OPTION" == "2" ]; then
-		update_espruino
+		release_serial
 	elif [ "$OPTION" == "3" ]; then
-		update_esp_cli
+		update_espruino
 	elif [ "$OPTION" == "4" ]; then
+		update_esp_cli
+	elif [ "$OPTION" == "5" ]; then
 		cleanup
 	elif [ "$OPTION" == "q" ]; then
 		echo "Bye!"
