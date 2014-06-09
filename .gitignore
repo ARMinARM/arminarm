@@ -3,6 +3,7 @@ bin/espruino_*
 bin/node_latest_armhf.deb
 
 src/CMSIS_StdPeriph/
+src/elua/
 src/esp-cli/
 src/Espruino/
 src/stlink/

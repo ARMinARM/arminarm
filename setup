@@ -37,6 +37,14 @@ update_esp_cli()
 	cd ..
 }
 
+update_elua()
+{
+	echo "UPDATE ELUA"
+	cd src
+	./update_elua.sh
+	cd ..
+}
+
 update_cmsis_stdperiph()
 {
 	echo "UPDATE CMSIS STDPERIPH"
@@ -111,12 +119,13 @@ show_options()
 	echo "	0)	Update/Install ARMinARM Toolchain"
 	echo "	1)	Add /opt/arminarm* to PATH env"
 	echo "	2)	Release Serial port /dev/ttyAMA0"
-	echo "	3)	Install CMSIS_StdPeriph Examples"
-	echo "	4)	Install node.js"
+	echo "	3)	Update/Install CMSIS_StdPeriph Examples"
+	echo "	4)	Update/Install node.js"
 #	echo ""
 	echo "	5)	Update/Install Espruino Source code"
 	echo "	6)	Update/Install esp-cli"
-	echo "	7)	Clean up"
+	echo "	7)	Update/Install elua"
+	echo "	8)	Clean up"
 	echo ""
 	echo "	q)	Quit"
 	echo ""
@@ -149,6 +158,8 @@ while [ "$OPTION" != "q" ]; do
 	elif [ "$OPTION" == "6" ]; then
 		update_esp_cli
 	elif [ "$OPTION" == "7" ]; then
+		update_elua
+	elif [ "$OPTION" == "8" ]; then
 		cleanup
 	elif [ "$OPTION" == "q" ]; then
 		echo "Bye!"

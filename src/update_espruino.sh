@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# http://howtonode.org/introduction-to-npm
-
 if [ -d Espruino ]; then
 	echo "Directory exists: updating"
 	cd Espruino
