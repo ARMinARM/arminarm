@@ -29,15 +29,23 @@ update_esp_cli()
 	cd ..
 }
 
+update_espruino()
+{
+	echo "UPDATE ESPRUINO"
+	cd src
+	./update_espruino.sh
+	cd ..
+}
+
 update_self()
 {
 	echo "UPDATE SELF"
+	git pull
+	
 	if [ -d /opt/arminarm ]; then
 		echo "Directory exists: updating"
-#		git pull
 	else
 		echo "Tools don't exist: installing"
-#		git pull
 		cd bin
 		./install_toolchain.sh
 		cd ..
@@ -46,18 +54,12 @@ update_self()
 
 	if [ -d /opt/arminarm/tools ]; then
 		echo "Directory exists: updating"
-#		git pull
-#		cd src/tools
-#		sudo cp -R * /opt/arminarm/tools/
-#		cd ../..
 		cd src
 		cp -r tools /opt/arminarm/
 		cd ..
 	else
 		echo "Tools don't exist: installing"
-#		git pull
 		cd src
-#		sudo cp -r tools /opt/arminarm/tools
 		cp -r tools /opt/arminarm/
 		cd ..
 	fi
@@ -75,8 +77,9 @@ show_options()
 	echo "#############################################################"
 	echo ""
 	echo "	1)	Update/Install ARMinARM Toolchain"
-	echo "	2)	Update/Install esp-cli"
-	echo "	3)	Clean up"
+	echo "	2)	Update/Install Espruino Source code"
+	echo "	3)	Update/Install esp-cli"
+	echo "	4)	Clean up"
 	echo ""
 	echo "	q)	Quit"
 	echo ""
@@ -97,8 +100,10 @@ while [ "$OPTION" != "q" ]; do
 		OPTION="q"
 		echo "Updated. Please run setup again."
 	elif [ "$OPTION" == "2" ]; then
-		update_esp_cli
+		update_espruino
 	elif [ "$OPTION" == "3" ]; then
+		update_esp_cli
+	elif [ "$OPTION" == "4" ]; then
 		cleanup
 	elif [ "$OPTION" == "q" ]; then
 		echo "Bye!"
