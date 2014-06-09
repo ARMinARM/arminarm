@@ -45,6 +45,14 @@ release_serial()
 	cd ..
 }
 
+path_env()
+{
+	echo "SET PATH ENV"
+	cd scripts
+	./path_env.sh
+	cd ..
+}
+
 update_self()
 {
 	echo "UPDATE SELF"
@@ -84,7 +92,8 @@ show_options()
 	echo "#                        ARMinARM                           #"
 	echo "#############################################################"
 	echo ""
-	echo "	1)	Update/Install ARMinARM Toolchain"
+	echo "	0)	Update/Install ARMinARM Toolchain"
+	echo "	1)	Add /opt/arminarm* to PATH env"
 	echo "	2)	Release Serial port /dev/ttyAMA0"
 	echo "	3)	Update/Install Espruino Source code"
 	echo "	4)	Update/Install esp-cli"
@@ -104,10 +113,12 @@ while [ "$OPTION" != "q" ]; do
 	echo "Enter your choice:"
 	read OPTION
 
-	if [ "$OPTION" == "1" ]; then
+	if [ "$OPTION" == "0" ]; then
 		update_self
 		OPTION="q"
 		echo "Updated. Please run setup again."
+	elif [ "$OPTION" == "1" ]; then
+		path_env
 	elif [ "$OPTION" == "2" ]; then
 		release_serial
 	elif [ "$OPTION" == "3" ]; then
