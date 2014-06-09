@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 #https://learn.adafruit.com/raspberry-pi-hosting-node-red/setting-up-node-dot-js
 

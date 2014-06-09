@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # http://www.support.code-red-tech.com/CodeRedWiki/HardwareDebugConnections
 

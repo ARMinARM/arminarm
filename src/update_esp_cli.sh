@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # http://howtonode.org/introduction-to-npm
 

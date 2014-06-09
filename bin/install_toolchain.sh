@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 
-#YAGARTO=arm-toolchain-bin-2014-01-11-raspbian.tar.gz # todo: get with wget from github
-YAGARTO=arm-toolchain-bin-2014-06-09-ubuntu.tar.gz # todo: get with wget from github
+YAGARTO=arm-toolchain-bin-2014-01-11-raspbian.tar.gz # todo: get with wget from github
+#YAGARTO=arm-toolchain-bin-2014-06-09-ubuntu.tar.gz # todo: get with wget from github
 
 if [ -f $YAGARTO ]; then
 	echo "Found toolchain tar.gz"
