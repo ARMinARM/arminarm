@@ -1,0 +1,13 @@
+#!/bin/sh
+
+TOOLS=/opt/arminarm/tools
+
+if [ "$1" == "reset" ]; then
+	sudo $TOOLS/stm32loader.py -p /dev/ttyAMA0 -t
+elif [ "$1" == "bootloader" ]; then
+	sudo $TOOLS/stm32loader.py -p /dev/ttyAMA0 -o
+elif [ "$1" == "flash" ]; then
+	sudo $TOOLS/stm32loader.py -p /dev/ttyAMA0 -e -v -w $2
+else
+	echo "'$OPTION' is an unkown option."
+fi

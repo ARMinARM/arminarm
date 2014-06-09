@@ -1,0 +1,115 @@
+#!/bin/sh
+
+ROOTDIR=`pwd`
+
+#echo "We're in:" $ROOTDIR
+
+# TODO
+#sudo apt-get update
+#sudo apt-get upgrade
+
+#sudo apt-get install cmake minicom screen python-serial autoconf libusb-1.0-0-dev
+#sudo ./release_serial.sh
+#sudo ./install_node.sh
+#sudo ./install_stlink
+
+cleanup()
+{
+	echo "CLEANUP"
+	cd scripts
+	./cleanup.sh
+	cd ..
+}
+
+update_esp_cli()
+{
+	echo "UPDATE ESP_CLI"
+	cd src
+	./update_esp_cli.sh
+	cd ..
+}
+
+update_self()
+{
+	echo "UPDATE SELF"
+	if [ -d /opt/arminarm ]; then
+		echo "Directory exists: updating"
+#		git pull
+	else
+		echo "Tools don't exist: installing"
+#		git pull
+		cd bin
+		./install_toolchain.sh
+		cd ..
+	fi
+
+
+	if [ -d /opt/arminarm/tools ]; then
+		echo "Directory exists: updating"
+#		git pull
+#		cd src/tools
+#		sudo cp -R * /opt/arminarm/tools/
+#		cd ../..
+		cd src
+		cp -r tools /opt/arminarm/
+		cd ..
+	else
+		echo "Tools don't exist: installing"
+#		git pull
+		cd src
+#		sudo cp -r tools /opt/arminarm/tools
+		cp -r tools /opt/arminarm/
+		cd ..
+	fi
+	
+}
+
+
+
+
+show_options()
+{
+	echo ""
+	echo "#############################################################"
+	echo "#                        ARMinARM                           #"
+	echo "#############################################################"
+	echo ""
+	echo "	1)	Update/Install ARMinARM Toolchain"
+	echo "	2)	Update/Install esp-cli"
+	echo "	3)	Clean up"
+	echo ""
+	echo "	q)	Quit"
+	echo ""
+}
+
+
+OPTION="0"
+
+while [ "$OPTION" != "q" ]; do
+
+	show_options
+
+	echo "Enter your choice:"
+	read OPTION
+
+	if [ "$OPTION" == "1" ]; then
+		update_self
+		OPTION="q"
+		echo "Updated. Please run setup again."
+	elif [ "$OPTION" == "2" ]; then
+		update_esp_cli
+	elif [ "$OPTION" == "3" ]; then
+		cleanup
+	elif [ "$OPTION" == "q" ]; then
+		echo "Bye!"
+	else
+		echo "'$OPTION' is an unkown option."
+	fi
+
+done
+
+
+
+#sudo apt-get update
+#sudo apt-get upgrade
+
