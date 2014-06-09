@@ -1,6 +1,8 @@
 bin/arm-toolchain-bin*
 bin/espruino_*
+bin/node_latest_armhf.deb
 
+src/CMSIS_StdPeriph/
 src/esp-cli/
 src/Espruino/
 src/stlink/

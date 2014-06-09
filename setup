@@ -37,6 +37,14 @@ update_esp_cli()
 	cd ..
 }
 
+update_cmsis_stdperiph()
+{
+	echo "UPDATE CMSIS STDPERIPH"
+	cd src
+	./update_cmsis_stdperiph.sh
+	cd ..
+}
+
 update_espruino()
 {
 	echo "UPDATE ESPRUINO"
@@ -103,10 +111,12 @@ show_options()
 	echo "	0)	Update/Install ARMinARM Toolchain"
 	echo "	1)	Add /opt/arminarm* to PATH env"
 	echo "	2)	Release Serial port /dev/ttyAMA0"
-	echo "	3)	Install node.js"
-	echo "	4)	Update/Install Espruino Source code"
-	echo "	5)	Update/Install esp-cli"
-	echo "	6)	Clean up"
+	echo "	3)	Install CMSIS_StdPeriph Examples"
+	echo "	4)	Install node.js"
+#	echo ""
+	echo "	5)	Update/Install Espruino Source code"
+	echo "	6)	Update/Install esp-cli"
+	echo "	7)	Clean up"
 	echo ""
 	echo "	q)	Quit"
 	echo ""
@@ -131,12 +141,14 @@ while [ "$OPTION" != "q" ]; do
 	elif [ "$OPTION" == "2" ]; then
 		release_serial
 	elif [ "$OPTION" == "3" ]; then
-		install_node
+		update_cmsis_stdperiph
 	elif [ "$OPTION" == "4" ]; then
-		update_espruino
+		install_node
 	elif [ "$OPTION" == "5" ]; then
-		update_esp_cli
+		update_espruino
 	elif [ "$OPTION" == "6" ]; then
+		update_esp_cli
+	elif [ "$OPTION" == "7" ]; then
 		cleanup
 	elif [ "$OPTION" == "q" ]; then
 		echo "Bye!"
