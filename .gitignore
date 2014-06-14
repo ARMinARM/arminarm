@@ -6,4 +6,5 @@ src/CMSIS_StdPeriph/
 src/elua/
 src/esp-cli/
 src/Espruino/
+src/openocd-arminarm/
 src/stlink/

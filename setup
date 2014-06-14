@@ -4,11 +4,11 @@ ROOTDIR=`pwd`
 
 #echo "We're in:" $ROOTDIR
 
-# TODO
 #sudo apt-get update
 #sudo apt-get upgrade
+#sudo apt-get install -y cmake minicom screen python-serial autoconf libusb-1.0-0-dev libtool libftdi-dev texinfo
 
-#sudo apt-get install cmake minicom screen python-serial autoconf libusb-1.0-0-dev
+# TODO
 #sudo ./release_serial.sh
 #sudo ./install_node.sh
 #sudo ./install_stlink
@@ -168,9 +168,3 @@ while [ "$OPTION" != "q" ]; do
 	fi
 
 done
-
-
-
-#sudo apt-get update
-#sudo apt-get upgrade
-
