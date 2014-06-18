@@ -1,17 +1,11 @@
 #!/bin/bash
 
-ROOTDIR=`pwd`
-
-#echo "We're in:" $ROOTDIR
+#ROOTDIR=`pwd`
 
 #sudo apt-get update
 #sudo apt-get upgrade
 #sudo apt-get install -y cmake minicom screen python-serial autoconf libusb-1.0-0-dev libtool libftdi-dev texinfo
 
-# TODO
-#sudo ./release_serial.sh
-#sudo ./install_node.sh
-#sudo ./install_stlink
 
 cleanup()
 {
@@ -61,6 +55,30 @@ update_espruino()
 	cd ..
 }
 
+update_libmaple()
+{
+	echo "UPDATE LIBMAPLE"
+	cd src
+	./update_libmaple.sh
+	cd ..
+}
+
+update_openocd()
+{
+	echo "UPDATE OPENOCD"
+	cd src
+	./update_openocd.sh
+	cd ..
+}
+
+update_stlink()
+{
+	echo "UPDATE STLINK"
+	cd src
+	./update_stlink.sh
+	cd ..
+}
+
 release_serial()
 {
 	echo "RELEASE SERIAL"
@@ -77,33 +95,36 @@ path_env()
 	cd ..
 }
 
-update_self()
+update_toolchain()
 {
-	echo "UPDATE SELF"
-	git pull
-	
+	update_self
+
+	echo "UPDATE TOOLCHAIN"
 	if [ -d /opt/arminarm ]; then
 		echo "Directory exists: updating"
 	else
 		echo "Tools don't exist: installing"
-		cd bin
-		./install_toolchain.sh
-		cd ..
 	fi
 
+	cd bin
+	./install_toolchain.sh
+	cd ..
 
 	if [ -d /opt/arminarm/tools ]; then
 		echo "Directory exists: updating"
-		cd src
-		sudo cp -r tools /opt/arminarm/
-		cd ..
 	else
 		echo "Tools don't exist: installing"
-		cd src
-		sudo cp -r tools /opt/arminarm/
-		cd ..
 	fi
-	
+
+	cd src
+	sudo cp -r tools /opt/arminarm/
+	cd ..
+}
+
+update_self()
+{
+	echo "UPDATE SELF"
+	git pull
 }
 
 
@@ -116,18 +137,23 @@ show_options()
 	echo "#                        ARMinARM                           #"
 	echo "#############################################################"
 	echo ""
-	echo "	0)	Update/Install ARMinARM Toolchain"
-	echo "	1)	Add /opt/arminarm* to PATH env"
-	echo "	2)	Release Serial port /dev/ttyAMA0"
-	echo "	3)	Update/Install CMSIS_StdPeriph Examples"
-	echo "	4)	Update/Install node.js"
-#	echo ""
-	echo "	5)	Update/Install Espruino Source code"
-	echo "	6)	Update/Install esp-cli"
-	echo "	7)	Update/Install elua"
-	echo "	8)	Clean up"
+	echo "	0) Update Self"
+	echo "	1) Update/Install ARMinARM Toolchain"
+	echo "	2) Add /opt/arminarm* to PATH env"
+	echo "	3) Release Serial port /dev/ttyAMA0"
+	echo "	4) Update/Install node.js"
 	echo ""
-	echo "	q)	Quit"
+	echo "	a) Update/Install CMSIS_StdPeriph Examples"
+	echo "	b) Update/Install Espruino Source code"
+	echo "	c) Update/Install esp-cli"
+	echo "	d) Update/Install eLua"
+	echo "	e) Update/Install LibMaple"
+	echo "	f) Update/Install OpenOCD"
+	echo "	g) Update/Install ST-Link"
+	echo ""
+#	echo "	b) Update/Install Espruino Source code"
+#	echo ""
+	echo "	q) Quit"
 	echo ""
 }
 
@@ -146,20 +172,29 @@ while [ "$OPTION" != "q" ]; do
 		OPTION="q"
 		echo "Updated. Please run setup again."
 	elif [ "$OPTION" == "1" ]; then
-		path_env
+		update_toolchain
 	elif [ "$OPTION" == "2" ]; then
-		release_serial
+		path_env
 	elif [ "$OPTION" == "3" ]; then
-		update_cmsis_stdperiph
+		release_serial
 	elif [ "$OPTION" == "4" ]; then
 		install_node
-	elif [ "$OPTION" == "5" ]; then
+	elif [ "$OPTION" == "a" ]; then
+		update_cmsis_stdperiph
+	elif [ "$OPTION" == "b" ]; then
 		update_espruino
-	elif [ "$OPTION" == "6" ]; then
+	elif [ "$OPTION" == "c" ]; then
 		update_esp_cli
-	elif [ "$OPTION" == "7" ]; then
+	elif [ "$OPTION" == "d" ]; then
 		update_elua
-	elif [ "$OPTION" == "8" ]; then
+	elif [ "$OPTION" == "e" ]; then
+		update_libmaple
+	elif [ "$OPTION" == "f" ]; then
+		update_openocd
+	elif [ "$OPTION" == "g" ]; then
+		update_stlink
+
+	elif [ "$OPTION" == "z" ]; then
 		cleanup
 	elif [ "$OPTION" == "q" ]; then
 		echo "Bye!"
