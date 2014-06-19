@@ -9,7 +9,8 @@ if [ -f $YAGARTO ]; then
 	cd arminarm
 	tar -xzvf ../$YAGARTO || { echo "Error extracting "$YAGARTO; exit; }
 	cd ..
-	sudo mv arminarm/ /opt/arminarm/
+	sudo rm -rf /opt/arminarm/
+	sudo mv arminarm/ /opt/
 	echo "Installed OK"
 else
 	echo "toolchain tar.gz not found. Get it from github first."

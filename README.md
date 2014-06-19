@@ -1,11 +1,16 @@
 ARMinARM software install scripts
 =================================
 
-You'll want the following packages installed:
+The ARMinARM installation scripts assume you're running an up-to-date Raspbian distribution (http://www.raspberrypi.org/downloads/). Other distributions will probably also work, but you may need to install additional software.
+
+    sudo apt-get update
+    sudo apt-get upgrade
+
+You'll want to install the following additional packages on Raspbian:
 
     sudo apt-get install cmake minicom screen python-serial autoconf libusb-1.0-0-dev libtool libftdi-dev texinfo
 
-Setup and install software for ARMinARM board.
+Setup and install software for the ARMinARM board by cloning the repository from github, and run setup.
 
     git clone https://github.com/ARMinARM/arminarm
     cd arminarm
