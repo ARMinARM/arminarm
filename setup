@@ -63,6 +63,14 @@ update_libmaple()
 	cd ..
 }
 
+update_libopencm3()
+{
+	echo "UPDATE LIBOPENCM3"
+	cd src
+	./update_libopencm3.sh
+	cd ..
+}
+
 update_openocd()
 {
 	echo "UPDATE OPENOCD"
@@ -147,9 +155,10 @@ show_options()
 	echo "	b) Update/Install Espruino"
 	echo "	c) Update/Install esp-cli"
 	echo "	d) Update/Install eLua"
-	echo "	e) Update/Install LibMaple"
-	echo "	f) Update/Install OpenOCD"
-	echo "	g) Update/Install ST-Link"
+	echo "	e) Update/Install libmaple"
+	echo "	f) Update/Install libopencm3"
+	echo "	g) Update/Install OpenOCD"
+	echo "	h) Update/Install ST-Link"
 	echo ""
 	echo "	q) Quit"
 	echo ""
@@ -188,8 +197,10 @@ while [ "$OPTION" != "q" ]; do
 	elif [ "$OPTION" == "e" ]; then
 		update_libmaple
 	elif [ "$OPTION" == "f" ]; then
-		update_openocd
+		update_libopencm3
 	elif [ "$OPTION" == "g" ]; then
+		update_openocd
+	elif [ "$OPTION" == "h" ]; then
 		update_stlink
 
 	elif [ "$OPTION" == "z" ]; then

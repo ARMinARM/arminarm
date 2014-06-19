@@ -7,5 +7,6 @@ src/elua/
 src/esp-cli/
 src/Espruino/
 src/libmaple/
+src/libopencm3-examples/
 src/openocd-arminarm/
 src/stlink/

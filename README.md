@@ -27,9 +27,10 @@ When you run setup, you'll see a menu.
         b) Update/Install Espruino
         c) Update/Install esp-cli
         d) Update/Install eLua
-        e) Update/Install LibMaple
-        f) Update/Install OpenOCD
-        g) Update/Install ST-Link
+        e) Update/Install libmaple
+        f) Update/Install libopencm3
+        g) Update/Install OpenOCD
+        h) Update/Install ST-Link
     
         q) Quit
     
