@@ -23,3 +23,17 @@ sudo make install
 sudo cp 49-stlinkv2.rules /etc/udev/rules.d/
 sudo udevadm control --reload-rules
 # unplug + replug st-link v2 usb device
+
+
+
+#For flashing with an ST-Link V2 or Fx-Discovery.
+#st-flash --reset write build/leds.bin 0x08000000
+
+#For debugging with an ST-Link V2 or Fx-Discovery.
+#st-util
+
+#In another terminal:
+#arm-none-eabi-gdb
+#(gdb) target extended-remote :4242
+#(gdb) load build/leds.elf
+#(gdb) r

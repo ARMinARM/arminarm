@@ -41,4 +41,4 @@ When you run setup, you'll see a menu.
     
     Enter your choice:
 
-You'll want to run the numeric options (0-4) at least once, to install all the basic tools. The alfabetic options (a-g) installs optional tools, frameworks or projects. Install all of them, or pick and choose as you like.
+You'll want to run the numeric options (0-4) at least once, to install all the basic tools. The alfabetic options (a-h) installs optional tools, frameworks or projects. Install all of them, or pick and choose as you like.
