@@ -382,7 +382,7 @@ if __name__ == "__main__":
     
     # Import Psyco if available
     setup()
-	print "Entering bootloader..."
+	# print "Entering bootloader..."
 	enterbootloader()
     try:
         import psyco
@@ -473,6 +473,7 @@ if __name__ == "__main__":
         
         if conf['bt']:
 			setup()
+			print "Entering bootloader..."
             enterbootloader()
         
         if (conf['write'] or conf['verify']):
@@ -502,7 +503,8 @@ if __name__ == "__main__":
 #    cmd.cmdGo(addr + 0x04)
     finally:
         cmd.releaseChip()
-        print "attempting reset"
-        reset_stm32()
+        if not conf['bt']:
+			print "attempting reset"
+			reset_stm32()
         clean()
 
