@@ -29,13 +29,16 @@ When you run setup, you'll see a menu.
         4) Update/Install node.js
     
         a) Update/Install CMSIS_StdPeriph Examples
-        b) Update/Install Espruino
+        b) Update/Install Espruino source code
         c) Update/Install esp-cli
-        d) Update/Install eLua
+        d) Update/Install eLua source code
         e) Update/Install libmaple
         f) Update/Install libopencm3
         g) Update/Install OpenOCD
         h) Update/Install ST-Link
+    
+        m) Upload espruino.bin to ARMinARM board
+        n) Upload elua.bin to ARMinARM board
     
         q) Quit
     
