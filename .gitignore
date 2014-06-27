@@ -1,6 +1,7 @@
 bin/arm-toolchain-bin*
-bin/espruino_*
-bin/node_latest_armhf.deb
+bin/espruino*
+bin/node*
+bin/elua*
 
 src/CMSIS_StdPeriph/
 src/elua/

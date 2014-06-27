@@ -103,6 +103,24 @@ path_env()
 	cd ..
 }
 
+upload_espruino()
+{
+	echo "UPLOADING ESPRUINO.BIN"
+	cd bin
+	./install_espruino_bin.sh
+	echo "espruino communicates on 9600 baud on /dev/ttyAMA0"
+	cd ..
+}
+
+upload_elua()
+{
+	echo "UPLOADING ELUA.BIN"
+	cd bin
+	./install_elua_bin.sh
+	echo "eLua communicates on 115200 baud on /dev/ttyAMA0"
+	cd ..
+}
+
 update_toolchain()
 {
 	update_self
@@ -110,8 +128,6 @@ update_toolchain()
 	echo "UPDATE TOOLCHAIN"
 	if [ -d /opt/arminarm ]; then
 		echo "Directory exists: updating"
-	else
-		echo "Tools don't exist: installing"
 	fi
 
 	cd bin
@@ -121,7 +137,7 @@ update_toolchain()
 	if [ -d /opt/arminarm/tools ]; then
 		echo "Directory exists: updating"
 	else
-		echo "Tools don't exist: installing"
+		echo "Tools not found: installing"
 	fi
 
 	cd src
@@ -152,13 +168,16 @@ show_options()
 	echo "	4) Update/Install node.js"
 	echo ""
 	echo "	a) Update/Install CMSIS_StdPeriph Examples"
-	echo "	b) Update/Install Espruino"
+	echo "	b) Update/Install Espruino source code"
 	echo "	c) Update/Install esp-cli"
-	echo "	d) Update/Install eLua"
+	echo "	d) Update/Install eLua source code"
 	echo "	e) Update/Install libmaple"
 	echo "	f) Update/Install libopencm3"
 	echo "	g) Update/Install OpenOCD"
 	echo "	h) Update/Install ST-Link"
+	echo ""
+	echo "	m) Upload espruino.bin to ARMinARM board"
+	echo "	n) Upload elua.bin to ARMinARM board"
 	echo ""
 	echo "	q) Quit"
 	echo ""
@@ -202,6 +221,13 @@ while [ "$OPTION" != "q" ]; do
 		update_openocd
 	elif [ "$OPTION" == "h" ]; then
 		update_stlink
+
+
+	elif [ "$OPTION" == "m" ]; then
+		upload_espruino
+	elif [ "$OPTION" == "n" ]; then
+		upload_elua
+
 
 	elif [ "$OPTION" == "z" ]; then
 		cleanup
