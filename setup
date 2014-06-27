@@ -4,7 +4,7 @@
 
 #sudo apt-get update
 #sudo apt-get upgrade
-#sudo apt-get install -y cmake minicom screen python-serial autoconf libusb-1.0-0-dev libtool libftdi-dev texinfo
+#sudo apt-get install -y minicom screen autoconf libusb-1.0-0-dev libtool libftdi-dev texinfo
 
 
 cleanup()
@@ -152,24 +152,25 @@ update_self()
 }
 
 
-
-
 show_options()
 {
 	echo ""
-	echo "#############################################################"
-	echo "#                        ARMinARM                           #"
-	echo "#############################################################"
+	echo "#######################################################################"
+	echo "#                              ARMinARM                               #"
+	echo "#######################################################################"
 	echo ""
+	echo "Essentials:"
 	echo "	0) Update Self"
 	echo "	1) Update/Install ARMinARM GCC Toolchain"
 	echo "	2) Add /opt/arminarm* to PATH env"
-	echo "	3) Release Serial port /dev/ttyAMA0"
+	echo "	3) Release Serial port /dev/ttyAMA0 (needs reboot afterwards)"
 	echo "	4) Update/Install node.js"
 	echo ""
+	echo "Fast start:"
 	echo "	10) Upload espruino.bin to ARMinARM board"
 	echo "	11) Upload elua.bin to ARMinARM board"
 	echo ""
+	echo "Source code:"
 	echo "	a) Update/Install CMSIS_StdPeriph Examples"
 	echo "	b) Update/Install Espruino source code"
 	echo "	c) Update/Install esp-cli"

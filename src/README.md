@@ -19,14 +19,13 @@ A little bit higher level -and therefore easier to program- would be to use the 
 
 The eLua directory is provided for those into Lua. The eLua project already exists for a while, and looks to be very stable.
 
-On the highest level there's Espruino. A fairly new project, but extremely promising. Event based programming in javascript. It doesn't get easier than that.
+On the highest level there's Espruino. A fairly new project, but very promising. Event based programming in javascript. It doesn't get easier than that.
 
-In general -unless specifically stated otherwise- these projects are already in, or downloaded to the `arminarm/src` directory. After you've selected the project to Install/Update in `setup` or ran the install script manually and it has finished downloading and updating, navigate to the project in the `src` directory, and run `make`. For example:
+In general -unless specifically stated otherwise- these projects are already in, or downloaded to the 'arminarm/src' directory. After you've selected the project to Install/Update in 'setup' or ran the install script manually and it has finished downloading and updating, navigate to the project in the 'src' directory, and run 'make'. For example:
 
-    cd src/Espruino
-    git checkout arminarm
+    cd src/CMSIS_StdPeriph/examples/leds
     make
 
 Upload the resulting .bin file with the `arminarm` tool.
 
-    arminarm flash espruino_1v65_ARMinARM.bin
+    arminarm flash build/leds.bin
