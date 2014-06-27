@@ -91,7 +91,7 @@ release_serial()
 {
 	echo "RELEASE SERIAL"
 	cd scripts
-	./release_serial.sh
+	sudo ./release_serial.sh
 	cd ..
 }
 
