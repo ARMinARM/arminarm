@@ -167,6 +167,9 @@ show_options()
 	echo "	3) Release Serial port /dev/ttyAMA0"
 	echo "	4) Update/Install node.js"
 	echo ""
+	echo "	10) Upload espruino.bin to ARMinARM board"
+	echo "	11) Upload elua.bin to ARMinARM board"
+	echo ""
 	echo "	a) Update/Install CMSIS_StdPeriph Examples"
 	echo "	b) Update/Install Espruino source code"
 	echo "	c) Update/Install esp-cli"
@@ -175,9 +178,6 @@ show_options()
 	echo "	f) Update/Install libopencm3"
 	echo "	g) Update/Install OpenOCD"
 	echo "	h) Update/Install ST-Link"
-	echo ""
-	echo "	m) Upload espruino.bin to ARMinARM board"
-	echo "	n) Upload elua.bin to ARMinARM board"
 	echo ""
 	echo "	q) Quit"
 	echo ""
@@ -205,6 +205,14 @@ while [ "$OPTION" != "q" ]; do
 		release_serial
 	elif [ "$OPTION" == "4" ]; then
 		install_node
+
+
+	elif [ "$OPTION" == "10" ]; then
+		upload_espruino
+	elif [ "$OPTION" == "11" ]; then
+		upload_elua
+
+
 	elif [ "$OPTION" == "a" ]; then
 		update_cmsis_stdperiph
 	elif [ "$OPTION" == "b" ]; then
@@ -221,13 +229,6 @@ while [ "$OPTION" != "q" ]; do
 		update_openocd
 	elif [ "$OPTION" == "h" ]; then
 		update_stlink
-
-
-	elif [ "$OPTION" == "m" ]; then
-		upload_espruino
-	elif [ "$OPTION" == "n" ]; then
-		upload_elua
-
 
 	elif [ "$OPTION" == "z" ]; then
 		cleanup

@@ -27,7 +27,10 @@ When you run setup, you'll see a menu.
         2) Add /opt/arminarm* to PATH env
         3) Release Serial port /dev/ttyAMA0
         4) Update/Install node.js
-    
+
+        10) Upload espruino.bin to ARMinARM board
+        11) Upload elua.bin to ARMinARM board
+        
         a) Update/Install CMSIS_StdPeriph Examples
         b) Update/Install Espruino source code
         c) Update/Install esp-cli
@@ -36,9 +39,6 @@ When you run setup, you'll see a menu.
         f) Update/Install libopencm3
         g) Update/Install OpenOCD
         h) Update/Install ST-Link
-    
-        m) Upload espruino.bin to ARMinARM board
-        n) Upload elua.bin to ARMinARM board
     
         q) Quit
     
