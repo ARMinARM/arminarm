@@ -26,6 +26,6 @@ In general -unless specifically stated otherwise- these projects are already in,
     cd src/CMSIS_StdPeriph/examples/leds
     make
 
-Upload the resulting .bin file with the `arminarm` tool.
+Upload the resulting .bin file with the 'arminarm' tool.
 
     arminarm flash build/leds.bin
