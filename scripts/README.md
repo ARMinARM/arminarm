@@ -1,5 +1,4 @@
 This is the directory for generic install scripts.
 
 - release serial
-- TODO PATH in .profile
-
+- /opt/arminarm/bin + /opt/arminarm/tools in PATH
