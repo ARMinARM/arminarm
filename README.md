@@ -75,3 +75,41 @@ To put the STM32 in bootloader mode:
 You can only use the tool 'arminarm' if the path to it (/opt/arminarm/tools) is added to your PATH environment variable. There's a menu option in 'setup' to do this for you. You only have to run this option once. The path is remembered even after reboots.
 
 Put jumpers on the first 2 and last 2 set of pins on the CONN header on the board (BOOT0, NRST, RX, TX).
+
+Uploading firmware
+==================
+
+Using the 'arminarm' tool to upload firmware with the ST bootloader looks like this:
+
+    pi@raspberrypi ~ $ arminarm flash my_awesome_firmware.bin 
+    GPIO version: 0.5.5
+    Pi revision 2
+    cmd.initChip
+    initChip
+    ACK
+    Bootloader version 22
+    Chip id `['0x4', '0x14']'
+    Write 256 bytes at 0x8000000
+    Write 256 bytes at 0x8000100
+    Write 256 bytes at 0x8000200
+    [...]
+    [... snip long list of writes ...]
+    [...]
+    Write 256 bytes at 0x8005900
+    Write 256 bytes at 0x8005A00
+    Write 256 bytes at 0x8005B00
+    Read 256 bytes at 0x8000000
+    Read 256 bytes at 0x8000100
+    Read 256 bytes at 0x8000200
+    [...]
+    [... snip long list of reads ...]
+    [...]
+    Read 256 bytes at 0x8005900
+    Read 256 bytes at 0x8005A00
+    Read 256 bytes at 0x8005B00
+    Verification OK
+    attempting reset
+    cleaning up...
+    done.
+    pi@raspberrypi ~ $
+
