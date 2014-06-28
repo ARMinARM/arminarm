@@ -6,15 +6,6 @@
 #sudo apt-get upgrade
 #sudo apt-get install -y minicom screen autoconf libusb-1.0-0-dev libtool libftdi-dev texinfo
 
-
-cleanup()
-{
-	echo "CLEANUP"
-	cd scripts
-	./cleanup.sh
-	cd ..
-}
-
 install_node()
 {
 	echo "INSTALL NODE"
@@ -231,8 +222,6 @@ while [ "$OPTION" != "q" ]; do
 	elif [ "$OPTION" == "h" ]; then
 		update_stlink
 
-	elif [ "$OPTION" == "z" ]; then
-		cleanup
 	elif [ "$OPTION" == "q" ]; then
 		echo "Bye!"
 	else
