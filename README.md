@@ -54,7 +54,7 @@ Toolchain (arm-none-eabi-gcc)
 
 The arm-none-eabi-gcc toolchain is installed in /opt/arminarm/. This toolchain is optimized to compile code for ARM Cortex M0/M1/M3/M4 microcontrollers with thumb, thumb2, and FPU hard float (M4) instructions.
 
-The scripts that where used to build the toolchain can be found here: [arm-toolchain-build-scripts](https://github.com/ARMinARM/arm-toolchain-build-scripts)
+The scripts that were used to build the toolchain can be found here: [arm-toolchain-build-scripts](https://github.com/ARMinARM/arm-toolchain-build-scripts)
 
 Tools
 =====
