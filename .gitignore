@@ -3,6 +3,8 @@ bin/espruino*
 bin/node*
 bin/elua*
 
+scripts/rpi-serial-console
+
 src/CMSIS_StdPeriph/
 src/elua/
 src/esp-cli/

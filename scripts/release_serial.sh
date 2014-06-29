@@ -1,26 +1,14 @@
 #!/bin/bash
 
-cd /etc
-echo -n "inittab: "
-if [ -f inittab.bak ]; then
-  echo "Backup exists: not overwriting"
-else
-  cp -a inittab inittab.bak
-  sed -e 's/^.*AMA0.*$/#\0/' < inittab > /tmp/inittab.$$
-  mv /tmp/inittab.$$ inittab
-  echo "OK"
+RPISERIALCONSOLE=rpi-serial-console
+URL=https://raw.github.com/ARMinARM/$RPISERIALCONSOLE/master/$RPISERIALCONSOLE
+
+
+if [ ! -f $RPISERIALCONSOLE ]; then
+	echo "rpi-serial-console not found. Getting it from github."
+	wget $URL
+	chmod +x $RPISERIALCONSOLE
+	#sudo cp $RPISERIALCONSOLE /usr/bin/$RPISERIALCONSOLE
 fi
 
-cd /boot
-echo -n "cmdline.txt: "
-if [ -f cmdline.txt.bak ]; then
-  echo "Backup exists: not overwriting"
-else
-  cp -a cmdline.txt cmdline.txt.bak
-  cat cmdline.txt					|	\
-		sed -e 's/console=ttyAMA0,115200//'	|	\
-		sed -e 's/console=tty1//'		|	\
-		sed -e 's/kgdboc=ttyAMA0,115200//' > /tmp/cmdline.txt.$$
-  mv /tmp/cmdline.txt.$$ cmdline.txt
-  echo "OK"
-fi
+sudo ./$RPISERIALCONSOLE $1

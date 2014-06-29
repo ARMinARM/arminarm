@@ -78,11 +78,19 @@ update_stlink()
 	cd ..
 }
 
-release_serial()
+rpi_serial_console_disable()
 {
-	echo "RELEASE SERIAL"
+	echo "DISABLE SERIAL"
 	cd scripts
-	sudo ./release_serial.sh
+	sudo ./release_serial.sh disable
+	cd ..
+}
+
+rpi_serial_console_enable()
+{
+	echo "ENABLE SERIAL"
+	cd scripts
+	sudo ./release_serial.sh enable
 	cd ..
 }
 
@@ -154,8 +162,9 @@ show_options()
 	echo "	0) Update Self"
 	echo "	1) Update/Install ARMinARM GCC Toolchain"
 	echo "	2) Add /opt/arminarm* to PATH env"
-	echo "	3) Release Serial port /dev/ttyAMA0 (needs reboot afterwards)"
-	echo "	4) Update/Install node.js"
+	echo "	3) Disable serial port (required for ARMinARM board, needs reboot)"
+	echo "	4) Enable serial port (for booting RPI over serial port, default)"
+	echo "	5) Update/Install node.js"
 	echo ""
 	echo "Fast start:"
 	echo "	10) Upload espruino.bin to ARMinARM board"
@@ -194,8 +203,10 @@ while [ "$OPTION" != "q" ]; do
 	elif [ "$OPTION" == "2" ]; then
 		path_env
 	elif [ "$OPTION" == "3" ]; then
-		release_serial
+		rpi_serial_console_disable
 	elif [ "$OPTION" == "4" ]; then
+		rpi_serial_console_enable
+	elif [ "$OPTION" == "5" ]; then
 		install_node
 
 
