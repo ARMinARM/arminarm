@@ -26,8 +26,9 @@ When you run setup, you'll see a menu.
         0) Update Self
         1) Update/Install ARMinARM GCC Toolchain
         2) Add /opt/arminarm* to PATH env
-        3) Release Serial port /dev/ttyAMA0 (needs reboot afterwards)
-        4) Update/Install node.js
+        3) Disable serial port (required for ARMinARM board, needs reboot)
+        4) Enable serial port (for booting RPI over serial port, default)
+        5) Update/Install node.js
     
     Fast start:
         10) Upload espruino.bin to ARMinARM board
