@@ -16,5 +16,6 @@ if [ -f $ARMINARM ]; then
 	cd ..
 	sudo rm -rf /opt/arminarm/
 	sudo mv arminarm/ /opt/
+	export PATH=$PATH:/opt/arminarm/bin
 	echo "Installed OK"
 fi
