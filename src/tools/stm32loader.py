@@ -25,12 +25,7 @@
 import sys, getopt
 import serial
 import time
-
-
-
 from stm32control import *
-
-
 
 try:
     from progressbar import *
@@ -48,6 +43,7 @@ def mdebug(level, message):
 
 class CmdException(Exception):
     pass
+
 
 class CommandInterface:
     def open(self, aport='/dev/ttyAMA0', abaudrate=115200) :
@@ -84,15 +80,9 @@ class CommandInterface:
 
     def reset(self):
         enterbootloader()
-        #time.sleep(0.5)
-        
-        #self.sp.setDTR(0)
-        #time.sleep(0.1)
-        #self.sp.setDTR(1)
-        #time.sleep(0.5)
-        
+
+
     def connect(self):
-        #print "connect_ACK"
         try:
             ask = ord(self.sp.read())
         except:
@@ -109,48 +99,35 @@ class CommandInterface:
                     print "NACK"
                     return 1
                 else:
-                    # Unknow responce
+                    # unknown response
                     print "NONE"
                     return 0
 
+
     def initChip(self):
-        # Set boot
         print "initChip"
-        #self.sp.setRTS(0)
         self.reset()
-        #print "self.sp.write"
-        self.sp.write("\x7F")       # Syncro
-        #print "while0"
+        self.sp.write("\x7F") # Sync
         ack = self.connect()
         while 1:
-            #print "while1"
             if ack == 1:
                 return 1                
             else:
                 self.sp.write("\x7F")
                 ack=self.connect()
-                
         else:
-            print "initChip1"
+            #print "initChip1"
             return 1
-            
-        
-        #ack = connect_ACK()
-        #if ack == 1:
-        #    return 1
-        #else:
-        #    self.sp.write("\x7F")       # Syncro
-        ##    time.sleep(0.1)
-        #    return 1
 
     def releaseChip(self):
-        self.sp.setRTS(1)
-        self.reset()
+        reset_stm32()
+
 
     def cmdGeneric(self, cmd):
         self.sp.write(chr(cmd))
         self.sp.write(chr(cmd ^ 0xFF)) # Control byte
         return self._wait_for_ask(hex(cmd))
+
 
     def cmdGet(self):
         if self.cmdGeneric(0x00):
@@ -165,6 +142,7 @@ class CommandInterface:
         else:
             raise CmdException("Get (0x00) failed")
 
+
     def cmdGetVersion(self):
         if self.cmdGeneric(0x01):
             mdebug(10, "*** GetVersion command")
@@ -175,6 +153,7 @@ class CommandInterface:
             return version
         else:
             raise CmdException("GetVersion (0x01) failed")
+
 
     def cmdGetID(self):
         if self.cmdGeneric(0x02):
@@ -261,6 +240,7 @@ class CommandInterface:
         else:
             raise CmdException("Erase memory (0x43) failed")
 
+
     def cmdWriteProtect(self, sectors):
         if self.cmdGeneric(0x63):
             mdebug(10, "*** Write protect command")
@@ -275,6 +255,7 @@ class CommandInterface:
         else:
             raise CmdException("Write Protect memory (0x63) failed")
 
+
     def cmdWriteUnprotect(self):
         if self.cmdGeneric(0x73):
             mdebug(10, "*** Write Unprotect command")
@@ -283,6 +264,7 @@ class CommandInterface:
             mdebug(10, "    Write Unprotect done")
         else:
             raise CmdException("Write Unprotect (0x73) failed")
+
 
     def cmdReadoutProtect(self):
         if self.cmdGeneric(0x82):
@@ -293,6 +275,7 @@ class CommandInterface:
         else:
             raise CmdException("Readout protect (0x82) failed")
 
+
     def cmdReadoutUnprotect(self):
         if self.cmdGeneric(0x92):
             mdebug(10, "*** Readout Unprotect command")
@@ -302,8 +285,6 @@ class CommandInterface:
         else:
             raise CmdException("Readout unprotect (0x92) failed")
 
-
-# Complex commands section
 
     def readMemory(self, addr, lng):
         data = []
@@ -327,6 +308,7 @@ class CommandInterface:
         data = data + self.cmdReadMemory(addr, lng)
         return data
 
+
     def writeMemory(self, addr, data):
         lng = len(data)
         if usepbar:
@@ -349,8 +331,6 @@ class CommandInterface:
         else:
             mdebug(5, "Write %(len)d bytes at 0x%(addr)X" % {'addr': addr, 'len': 256})
         self.cmdWriteMemory(addr, data[offs:offs+lng] + ([0xFF] * (256-lng)) )
-
-
 
 
     def __init__(self) :
@@ -379,11 +359,9 @@ def usage():
 
 
 if __name__ == "__main__":
-    
-    # Import Psyco if available
+	# print info about Pi and RPi.GPIO version
     setup()
-    # print "Entering bootloader..."
-    enterbootloader()
+    
     try:
         import psyco
         psyco.full()
@@ -402,9 +380,7 @@ if __name__ == "__main__":
             'rst': 0,
             'bt': 0,
         }
-
-# http://www.python.org/doc/2.5.2/lib/module-getopt.html
-
+    
     try:
         opts, args = getopt.getopt(sys.argv[1:], "hqVewvrtop:b:a:l:")
     except getopt.GetoptError, err:
@@ -448,32 +424,28 @@ if __name__ == "__main__":
 
     cmd = CommandInterface()
     cmd.open(conf['port'], conf['baud'])
-    mdebug(10, "Open port %(port)s, baud %(baud)d" % {'port':conf['port'], 'baud':conf['baud']})
+    mdebug(0, "Open port %(port)s, baud %(baud)d" % {'port':conf['port'], 'baud':conf['baud']})
     try:
         try:
-            print "cmd.initChip"
+            #print "cmd.initChip"
             cmd.initChip()
             
         except:
-            print "Can't init. Ensure that BOOT0 is enabled and reset device"
-
+            print "Can't init. Ensure all jumpers are placed correctly and there's no UART session open already."
 
         bootversion = cmd.cmdGet()
         mdebug(0, "Bootloader version %X" % bootversion)
-        mdebug(0, "Chip id `%s'" % str(map(lambda c: hex(ord(c)), cmd.cmdGetID())))
-#    cmd.cmdGetVersion()
-#    cmd.cmdGetID()
-#    cmd.cmdReadoutUnprotect()
-#    cmd.cmdWriteUnprotect()
-#    cmd.cmdWriteProtect([0, 1])
+        mdebug(0, "Chip id %s" % str(map(lambda c: hex(ord(c)), cmd.cmdGetID())))
+        #cmd.cmdGetVersion()
+        #cmd.cmdGetID()
+        #cmd.cmdReadoutUnprotect()
+        #cmd.cmdWriteUnprotect()
+        #cmd.cmdWriteProtect([0, 1])
         
         if conf['rst']:
-            setup()
             reset_stm32()
         
         if conf['bt']:
-            setup()
-            print "Entering bootloader..."
             enterbootloader()
         
         if (conf['write'] or conf['verify']):
@@ -500,11 +472,9 @@ if __name__ == "__main__":
             rdata = cmd.readMemory(conf['address'], conf['len'])
             file(args[0], 'wb').write(''.join(map(chr,rdata)))
 
-#    cmd.cmdGo(addr + 0x04)
     finally:
-        cmd.releaseChip()
+        #cmd.releaseChip()
         if not conf['bt']:
-            print "attempting reset"
+            #print "attempting reset"
             reset_stm32()
         clean()
-
