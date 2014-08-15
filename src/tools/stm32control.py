@@ -5,7 +5,7 @@ import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BOARD)
 
 NRST = 7 #GPIO4
-BOOT0 = 11 #GPIO17
+BOOT0 = 26 #GPIO7
 
 SHORT = 0.1
 LONG = 0.5
