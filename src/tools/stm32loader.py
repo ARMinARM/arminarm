@@ -362,6 +362,9 @@ if __name__ == "__main__":
 	# print info about Pi and RPi.GPIO version
     setup()
     
+    # make sure we can always access the STM32, even if there are USART interrupts taking 'control'
+    enterbootloader()
+    
     try:
         import psyco
         psyco.full()
