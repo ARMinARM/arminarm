@@ -38,6 +38,14 @@ update_cmsis_stdperiph()
 	cd ..
 }
 
+update_dfu-util()
+{
+	echo "UPDATE DFU-UTIL"
+	cd src
+	./update_dfu-util.sh
+	cd ..
+}
+
 update_espruino()
 {
 	echo "UPDATE ESPRUINO"
@@ -179,6 +187,7 @@ show_options()
 	echo "	f) Update/Install libopencm3"
 	echo "	g) Update/Install OpenOCD"
 	echo "	h) Update/Install ST-Link"
+	echo "	i) Update/Install dfu-util"
 	echo ""
 	echo "	q) Quit"
 	echo ""
@@ -232,6 +241,8 @@ while [ "$OPTION" != "q" ]; do
 		update_openocd
 	elif [ "$OPTION" == "h" ]; then
 		update_stlink
+	elif [ "$OPTION" == "i" ]; then
+		update_dfu-util
 
 	elif [ "$OPTION" == "q" ]; then
 		echo "Bye!"

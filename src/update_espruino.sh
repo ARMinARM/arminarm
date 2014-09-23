@@ -5,7 +5,7 @@ if [ -d Espruino ]; then
 	cd Espruino
 	git checkout arminarm
 	git pull
-#	make
+#	ARMINARM=1 RELEASE=1 make
 	cd ..
 	
 else
@@ -13,7 +13,7 @@ else
 	git clone https://github.com/ARMinARM/Espruino/
 	cd Espruino
 	git checkout arminarm
-#	make
+#	ARMINARM=1 RELEASE=1 make
 	cd ..
 fi
 
