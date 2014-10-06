@@ -43,6 +43,7 @@ When you run setup, you'll see a menu.
         f) Update/Install libopencm3
         g) Update/Install OpenOCD
         h) Update/Install ST-Link
+        i) Update/Install dfu-util
     
         q) Quit
     
