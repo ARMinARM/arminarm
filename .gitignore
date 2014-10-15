@@ -13,3 +13,4 @@ src/libmaple/
 src/libopencm3-examples/
 src/openocd-arminarm/
 src/stlink/
+src/dfu-util/
