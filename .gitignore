@@ -12,5 +12,6 @@ src/Espruino/
 src/libmaple/
 src/libopencm3-examples/
 src/openocd-arminarm/
+src/openocd/
 src/stlink/
 src/dfu-util/
