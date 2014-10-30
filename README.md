@@ -49,7 +49,9 @@ When you run setup, you'll see a menu.
     
     Enter your choice:
 
-You'll want to run the numeric options (0-3) at least once, to install all the basic tools and make the serial port available. The alfabetic options (a-h) installs optional tools, frameworks or projects. Install all of them, or pick and choose as you like. If you want to start right away, choose option 10 (espruino) or 11 (elua). After you uploaded one of them, start 'minicom' or 'screen' to start an interactive session. Espruino communicates on 9600 baud, elua on 115200. Both use /dev/ttyAMA0 as the serial port.
+You'll want to run the numeric options (0-3) at least once, to install all the basic tools and make the serial port available.
+
+The alfabetic options (a-i) installs optional tools, frameworks or projects. Install all of them, or pick and choose as you like. If you want to start right away, choose option 10 (espruino) or 11 (elua). After you uploaded one of them, start 'minicom' or 'screen' to start an interactive session. Espruino communicates on 9600 baud, elua on 115200. Both use /dev/ttyAMA0 as the serial port.
 
 Toolchain (arm-none-eabi-gcc)
 =============================
@@ -69,10 +71,14 @@ Whatever firmware you have compiled (say 'blinky.bin'), you can upload it with:
 To reset the STM32 on the ARMinARM board:
 
     arminarm reset
-    
+
 To put the STM32 in bootloader mode:
 
     arminarm bootloader
+
+To start openocd using sysfsgpio interface:
+
+    arminarm openocd
 
 You can only use the tool 'arminarm' if the path to it (/opt/arminarm/tools) is added to your PATH environment variable. There's a menu option in 'setup' to do this for you. You only have to run this option once. The path is remembered even after reboots.
 
