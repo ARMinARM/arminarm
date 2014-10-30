@@ -11,5 +11,5 @@ elif [ "$1" == "flash" ]; then
 elif [ "$1" == "openocd" ]; then
 	sudo openocd -s /usr/share/openocd/scripts -f /opt/arminarm/tools/arminarm.tcl
 else
-	echo "'$OPTION' is an unkown option."
+	echo "'$1' is an unkown option."
 fi
