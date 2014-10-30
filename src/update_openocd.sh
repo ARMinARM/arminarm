@@ -7,8 +7,7 @@ if [ -d openocd ]; then
 	# assume we're already bootstrapped and configured
 else
 	echo "First time git clone: installing"
-#	git clone git://git.code.sf.net/p/openocd/code openocd
-	git clone https://github.com/ARMinARM/openocd
+	git clone git://git.code.sf.net/p/openocd/code openocd
 	cd openocd
 	./bootstrap
 	./configure --enable-sysfsgpio --enable-bcm2835gpio --enable-buspirate --prefix=/usr
