@@ -76,9 +76,13 @@ To put the STM32 in bootloader mode:
 
     arminarm bootloader
 
-To start openocd using sysfsgpio interface:
+To start openocd server using sysfsgpio interface:
 
     arminarm openocd
+
+Connect to it in arm-none-eabi-gdb using:
+
+    (gdb) target extended-remote localhost:3333
 
 You can only use the tool 'arminarm' if the path to it (/opt/arminarm/tools) is added to your PATH environment variable. There's a menu option in 'setup' to do this for you. You only have to run this option once. The path is remembered even after reboots.
 
@@ -88,6 +92,29 @@ Uploading firmware
 ==================
 
 Using the 'arminarm' tool to upload firmware with the ST bootloader looks like this:
+
+    pi@raspberrypi ~ $ arminarm flash myfirmware.bin 
+    stm32flash 0.4
+
+    http://stm32flash.googlecode.com/
+
+    Using Parser : Raw BINARY
+    Interface serial_posix: 115200 8E1
+    Version      : 0x22
+    Option 1     : 0x00
+    Option 2     : 0x00
+    Device ID    : 0x0414 (High-density)
+    - RAM        : 64KiB  (512b reserved by bootloader)
+    - Flash      : 512KiB (sector size: 2x2048)
+    - Option RAM : 16b
+    - System RAM : 2KiB
+    Write to memory
+    Erasing memory
+    Wrote and verified address 0x080004a4 (100.00%) Done.
+
+    Starting execution at address 0x08000000... done.
+
+If 'stm32flash' for some reason didn't compile successfully during installation of the toolchain, it will look like this:
 
     pi@raspberrypi ~ $ arminarm flash myfirmware.bin 
     GPIO version: 0.5.7
@@ -110,28 +137,4 @@ Using the 'arminarm' tool to upload firmware with the ST bootloader looks like t
     Verification OK
     cleaning up...
     done.
-
-
-If 'stm32flash' compiled successfully during installation of the toolchain, it will look like this:
-
-    pi@raspberrypi ~ $ arminarm flash myfirmware.bin 
-    stm32flash 0.4
-
-    http://stm32flash.googlecode.com/
-
-    Using Parser : Raw BINARY
-    Interface serial_posix: 115200 8E1
-    Version      : 0x22
-    Option 1     : 0x00
-    Option 2     : 0x00
-    Device ID    : 0x0414 (High-density)
-    - RAM        : 64KiB  (512b reserved by bootloader)
-    - Flash      : 512KiB (sector size: 2x2048)
-    - Option RAM : 16b
-    - System RAM : 2KiB
-    Write to memory
-    Erasing memory
-    Wrote and verified address 0x080004a4 (100.00%) Done.
-
-    Starting execution at address 0x08000000... done.
 
