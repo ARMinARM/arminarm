@@ -3,6 +3,7 @@ import time, sys
 import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BOARD)
+GPIO.setwarnings(False)
 
 NRST = 7 #GPIO4
 BOOT0 = 26 #GPIO7

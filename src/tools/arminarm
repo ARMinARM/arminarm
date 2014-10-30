@@ -1,0 +1,38 @@
+#!/bin/bash
+
+PORT=/dev/ttyAMA0
+BAUD=115200
+STM32FLASH=/usr/local/bin/stm32flash
+TOOLS=/opt/arminarm/tools
+
+if [ "$1" == "reset" ]; then
+	if [ -x $STM32FLASH ]; then
+		sudo stm32flash -b $BAUD $PORT -i 7,-4,4 -R -g 0
+	else
+		sudo $TOOLS/stm32loader.py -p $PORT -t
+	fi	
+elif [ "$1" == "bootloader" ]; then
+	if [ -x $STM32FLASH ]; then
+		sudo stm32flash -b $BAUD $PORT -i -4,4
+	else
+		sudo $TOOLS/stm32loader.py -p $PORT -o
+	fi	
+elif [ "$1" == "flash" ]; then
+	if [ -x $STM32FLASH ]; then
+		sudo stm32flash -b $BAUD $PORT -i 7,-4,4 -w $2 -v -R -g 0
+	else
+		sudo $TOOLS/stm32loader.py -p $PORT -e -v -w $2
+	fi	
+elif [ "$1" == "openocd" ]; then
+	sudo openocd -s /usr/share/openocd/scripts -f /opt/arminarm/tools/arminarm.tcl
+else
+	echo "Usage:"
+	echo "    $ arminarm reset"
+	echo "        reset device and start execution."
+	echo "    $ arminarm bootloader"
+	echo "        start device in bootloader mode."
+	echo "    $ arminarm flash path/to/blinky.bin"
+	echo "        upload 'blinky.bin' to device and start execution."
+	echo "    $ arminarm openocd"
+	echo "        start openocd server on localhost:3333"
+fi

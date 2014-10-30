@@ -86,6 +86,14 @@ update_stlink()
 	cd ..
 }
 
+update_stm32flash()
+{
+	echo "UPDATE STM32FLASH"
+	cd src
+	./update_stm32flash.sh
+	cd ..
+}
+
 rpi_serial_console_disable()
 {
 	echo "DISABLE SERIAL"
@@ -150,6 +158,8 @@ update_toolchain()
 	cd src
 	sudo cp -r tools /opt/arminarm/
 	cd ..
+	
+	update_stm32flash
 }
 
 update_self()
