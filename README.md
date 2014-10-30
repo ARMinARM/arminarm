@@ -89,35 +89,49 @@ Uploading firmware
 
 Using the 'arminarm' tool to upload firmware with the ST bootloader looks like this:
 
-    pi@raspberrypi ~ $ arminarm flash my_awesome_firmware.bin 
-    GPIO version: 0.5.5
-    Pi revision 2
-    cmd.initChip
+    pi@raspberrypi ~ $ arminarm flash myfirmware.bin 
+    GPIO version: 0.5.7
+    Pi revision 3
+    Open port /dev/ttyAMA0, baud 115200
     initChip
     ACK
     Bootloader version 22
-    Chip id `['0x4', '0x14']'
+    Chip id ['0x4', '0x14']
     Write 256 bytes at 0x8000000
     Write 256 bytes at 0x8000100
     Write 256 bytes at 0x8000200
-    [...]
-    [... snip long list of writes ...]
-    [...]
-    Write 256 bytes at 0x8005900
-    Write 256 bytes at 0x8005A00
-    Write 256 bytes at 0x8005B00
+    Write 256 bytes at 0x8000300
+    Write 256 bytes at 0x8000400
     Read 256 bytes at 0x8000000
     Read 256 bytes at 0x8000100
     Read 256 bytes at 0x8000200
-    [...]
-    [... snip long list of reads ...]
-    [...]
-    Read 256 bytes at 0x8005900
-    Read 256 bytes at 0x8005A00
-    Read 256 bytes at 0x8005B00
+    Read 256 bytes at 0x8000300
+    Read 256 bytes at 0x8000400
     Verification OK
-    attempting reset
     cleaning up...
     done.
-    pi@raspberrypi ~ $
+
+
+If 'stm32flash' compiled successfully during installation of the toolchain, it will look like this:
+
+    pi@raspberrypi ~ $ arminarm flash myfirmware.bin 
+    stm32flash 0.4
+
+    http://stm32flash.googlecode.com/
+
+    Using Parser : Raw BINARY
+    Interface serial_posix: 115200 8E1
+    Version      : 0x22
+    Option 1     : 0x00
+    Option 2     : 0x00
+    Device ID    : 0x0414 (High-density)
+    - RAM        : 64KiB  (512b reserved by bootloader)
+    - Flash      : 512KiB (sector size: 2x2048)
+    - Option RAM : 16b
+    - System RAM : 2KiB
+    Write to memory
+    Erasing memory
+    Wrote and verified address 0x080004a4 (100.00%) Done.
+
+    Starting execution at address 0x08000000... done.
 
