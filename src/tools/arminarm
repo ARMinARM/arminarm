@@ -2,24 +2,24 @@
 
 PORT=/dev/ttyAMA0
 BAUD=115200
-#STM32FLASH=/usr/local/bin/stm32flash
+STM32FLASH=/usr/local/bin/stm32flash
 TOOLS=/opt/arminarm/tools
 
 if [ "$1" == "reset" ]; then
 	if [ -n "$STM32FLASH" ]; then
-		sudo stm32flash -b $BAUD $PORT -i 7,-4,4 -R -g 0
+		sudo stm32flash -b $BAUD $PORT -i 7,-4,4:-7,-4,4 -R
 	else
 		sudo $TOOLS/stm32loader.py -p $PORT -t
 	fi	
 elif [ "$1" == "bootloader" ]; then
 	if [ -n "$STM32FLASH" ]; then
-		sudo stm32flash -b $BAUD $PORT -i -4,4
+		sudo stm32flash -b $BAUD $PORT -i 7,-4,4:-7,-4,4
 	else
 		sudo $TOOLS/stm32loader.py -p $PORT -o
 	fi	
 elif [ "$1" == "flash" ]; then
 	if [ -n "$STM32FLASH" ]; then
-		sudo stm32flash -b $BAUD $PORT -i 7,-4,4 -w $2 -v -R -g 0
+		sudo stm32flash -b $BAUD $PORT -i 7,-4,4:-7,-4,4 -v -w $2 -R
 	else
 		sudo $TOOLS/stm32loader.py -p $PORT -e -v -w $2
 	fi	
