@@ -223,8 +223,10 @@ while [ "$OPTION" != "q" ]; do
 		path_env
 	elif [ "$OPTION" == "3" ]; then
 		rpi_serial_console_disable
+		OPTION="q"
 	elif [ "$OPTION" == "4" ]; then
 		rpi_serial_console_enable
+		OPTION="q"
 	elif [ "$OPTION" == "5" ]; then
 		install_node
 

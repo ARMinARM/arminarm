@@ -1,7 +1,7 @@
 #!/bin/bash
 
 RPISERIALCONSOLE=rpi-serial-console
-URL=https://raw.github.com/ARMinARM/$RPISERIALCONSOLE/master/$RPISERIALCONSOLE
+URL=https://raw.githubusercontent.com/ARMinARM/$RPISERIALCONSOLE/master/$RPISERIALCONSOLE
 
 
 if [ ! -f $RPISERIALCONSOLE ]; then
