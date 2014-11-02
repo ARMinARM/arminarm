@@ -155,9 +155,7 @@ update_toolchain()
 		echo "Tools not found: installing"
 	fi
 
-	cd src
-	sudo cp -r tools /opt/arminarm/
-	cd ..
+	sudo cp -r src/tools /opt/arminarm/
 	
 	update_stm32flash
 }
@@ -166,6 +164,8 @@ update_self()
 {
 	echo "UPDATE SELF"
 	git pull
+	
+	sudo cp -r src/tools /opt/arminarm/
 }
 
 
