@@ -64,9 +64,9 @@ update_libmaple()
 
 update_libopencm3()
 {
-	echo "UPDATE LIBOPENCM3"
+	echo "UPDATE LIBOPENCM3-PRJ"
 	cd src
-	./update_libopencm3.sh
+	./update_libopencm3-prj.sh
 	cd ..
 }
 
@@ -194,7 +194,7 @@ show_options()
 	echo "	c) Update/Install esp-cli"
 	echo "	d) Update/Install eLua source code"
 	echo "	e) Update/Install libmaple"
-	echo "	f) Update/Install libopencm3"
+	echo "	f) Update/Install libopencm3-prj"
 	echo "	g) Update/Install OpenOCD"
 	echo "	h) Update/Install ST-Link"
 	echo "	i) Update/Install dfu-util"
