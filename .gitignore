@@ -11,6 +11,7 @@ src/esp-cli/
 src/Espruino/
 src/libmaple/
 src/libopencm3-examples/
+src/libopencm3-prj/
 src/openocd-arminarm/
 src/openocd/
 src/stlink/
