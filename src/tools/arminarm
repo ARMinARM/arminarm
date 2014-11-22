@@ -1,38 +1,118 @@
 #!/bin/bash
 
+CMD="$1"
+FILE="$2"
+TOOL="stm32flash"
+
 PORT=/dev/ttyAMA0
 BAUD=115200
 STM32FLASH=/usr/local/bin/stm32flash
-TOOLS=/opt/arminarm/tools
+STM32LOADER=/opt/arminarm/tools/stm32loader.py
 
-if [ "$1" == "reset" ]; then
-	if [ -n "$STM32FLASH" ]; then
-		sudo stm32flash -b $BAUD $PORT -i 7,-4,4:-7,-4,4 -R
+usage()
+{
+	echo "Usage: arminarm [options] <filename>
+
+[options] is any of the following:
+  -f <file>  flash <file>  uploads <file> to ARMinARM board
+  -r         reset         reset to Flash start (0x8000000)
+  -b         bootloader    reset to SRAM (bootloader mode)
+  -l         loader        use stm32loader.py (stm32flash is default)
+  -d         debug         start openocd server on localhost:3333
+  -h         help          show this info
+
+deprecated (but still works):
+  arminarm flash <file>    please use: -f <file>
+  arminarm reset           please use: -r
+  arminarm bootloader      please use: -b
+  arminarm openocd         please use: -d
+
+stm32loader.py fallback:
+  arminarm -lf blinky.bin  upload using stm32loader.py
+  arminarm -lr             reset to Flash using stm32loader.py
+  arminarm -lb             reset to SRAM using stm32loader.py
+
+suggested usage:
+  arminarm -f blinky.bin   upload using stm32flash
+  arminarm -r              reset to Flash start (0x8000000)
+  arminarm -b              reset to SRAM (bootloader mode)
+  arminarm -d              start openocd server on localhost:3333
+  arminarm -h              show this info
+"
+}
+
+
+while getopts ":hlbrdf:" opt; do
+  case $opt in
+    h)
+      CMD="help"
+      ;;
+    l)
+	  #TOOL was "stm32flash"
+      TOOL="stm32loader.py"
+      ;;
+    b)
+      CMD="bootloader"
+      ;;
+    r)
+      CMD="reset"
+      ;;
+    d)
+      CMD="openocd"
+      ;;
+    f)
+      CMD="flash"
+      FILE="$OPTARG"
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG"
+      CMD="$OPTARG"
+      usage
+      exit 1
+      ;;
+    :)
+      echo "Option -$OPTARG requires an argument."
+      usage
+      exit 1
+      ;;
+  esac
+done
+
+if [ "$CMD" == "reset" ]; then
+	if [ "$TOOL" == "stm32flash" ]; then
+		echo "reset using stm32flash"
+		sudo $STM32FLASH -b $BAUD $PORT -i 7,-4,4:-7,-4,4 -R
 	else
-		sudo $TOOLS/stm32loader.py -p $PORT -t
+		echo "reset using stm32loader"
+		sudo $STM32LOADER -p $PORT -t
 	fi	
-elif [ "$1" == "bootloader" ]; then
-	if [ -n "$STM32FLASH" ]; then
-		sudo stm32flash -b $BAUD $PORT -i 7,-4,4:-7,-4,4
+elif [ "$CMD" == "bootloader" ]; then
+	if [ "$TOOL" == "stm32flash" ]; then
+		echo "reset to bootloader using stm32flash"
+		sudo $STM32FLASH -b $BAUD $PORT -i 7,-4,4:-7,-4,4
 	else
-		sudo $TOOLS/stm32loader.py -p $PORT -o
+		echo "reset to bootloader using stm32loader"
+		sudo $STM32LOADER -p $PORT -o
 	fi	
-elif [ "$1" == "flash" ]; then
-	if [ -n "$STM32FLASH" ]; then
-		sudo stm32flash -b $BAUD $PORT -i 7,-4,4:-7,-4,4 -v -w $2 -R
+elif [ "$CMD" == "flash" ]; then
+	if [ "$TOOL" == "stm32flash" ]; then
+		echo "flashing $FILE using stm32flash"
+		sudo $STM32FLASH -b $BAUD $PORT -i 7,-4,4:-7,-4,4 -v -w $FILE -R
 	else
-		sudo $TOOLS/stm32loader.py -p $PORT -e -v -w $2
+		echo "flashing $FILE using stm32loader"
+		sudo $STM32LOADER -p $PORT -e -v -w $FILE
 	fi	
-elif [ "$1" == "openocd" ]; then
+elif [ "$CMD" == "openocd" ]; then
 	sudo openocd -s /usr/share/openocd/scripts -f /opt/arminarm/tools/arminarm.tcl
+elif [ "$CMD" == "help" ]; then
+	usage
+elif [ "$CMD" == "" ]; then
+	usage
 else
-	echo "Usage:"
-	echo "    $ arminarm reset"
-	echo "        reset device and start execution."
-	echo "    $ arminarm bootloader"
-	echo "        start device in bootloader mode."
-	echo "    $ arminarm flash path/to/blinky.bin"
-	echo "        upload 'blinky.bin' to device and start execution."
-	echo "    $ arminarm openocd"
-	echo "        start openocd server on localhost:3333"
+	echo CMD = "${CMD}"
+	echo TOOL = "${TOOL}"
+	echo FILE = "${FILE}"
+	echo ""
+	
+	usage
 fi
