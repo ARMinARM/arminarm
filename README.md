@@ -40,7 +40,7 @@ When you run setup, you'll see a menu.
         c) Update/Install esp-cli
         d) Update/Install eLua source code
         e) Update/Install libmaple
-        f) Update/Install libopencm3
+        f) Update/Install libopencm3-prj
         g) Update/Install OpenOCD
         h) Update/Install ST-Link
         i) Update/Install dfu-util
@@ -58,27 +58,38 @@ Toolchain (arm-none-eabi-gcc)
 
 The arm-none-eabi-gcc toolchain is installed in /opt/arminarm/. This toolchain is optimized to compile code for ARM Cortex M0/M1/M3/M4 microcontrollers with thumb, thumb2, and FPU hard float (M4) instructions.
 
-The scripts that were used to build the toolchain can be found here: [arm-toolchain-build-scripts](https://github.com/ARMinARM/arm-toolchain-build-scripts)
+The scripts that were used to build the toolchain are based on Yagarto, and can be found here: [arm-toolchain-build-scripts](https://github.com/ARMinARM/arm-toolchain-build-scripts)
+
+The toolchain compiles firmware for the STM32 on the ARMinARM board, but it should also work for boards from other manufacturers. If the board has an ARM Cortex-M chip (STM32, NXP, Atmel, TI etc.), it'll probably compile. YMMV.
 
 Tools
 =====
 A set of tools for uploading firmware to the STM32 on the ARMinARM board come with the toolchain. The tool 'arminarm' is automatically installed to /opt/arminarm/tools when you install the toolchain from the 'setup' menu. It uses the default bootloader that's available on every STM32 chip.
 
+Under the hood, communicating with the bootloader is done with one of two tools: [stm32flash](https://code.google.com/p/stm32flash/), or a modified [stm32loader.py](https://github.com/jsnyder/stm32loader). They both work well, but you may find stm32flash has a somewhat cleaner interface, and handles errors a little better. The default is to use stm32flash. When adding the -l flag, stm32loader.py is used.
+
 Whatever firmware you have compiled (say 'blinky.bin'), you can upload it with:
 
-    arminarm flash path/to/blinky.bin
+    arminarm flash path/to/blinky.bin   # deprecated
+    arminarm -f path/to/blinky.bin      # use stm32flash
+    arminarm -lf path/to/blinky.bin     # use stm32loader.py
 
 To reset the STM32 on the ARMinARM board:
 
-    arminarm reset
+    arminarm reset        # deprecated
+    arminarm -r           # use stm32flash
+    arminarm -lr          # use stm32loader.py
 
 To put the STM32 in bootloader mode:
 
-    arminarm bootloader
+    arminarm bootloader   # deprecated
+    arminarm -b           # use stm32flash
+    arminarm -lb          # use stm32loader.py
 
 To start openocd server using sysfsgpio interface:
 
-    arminarm openocd
+    arminarm openocd      # deprecated
+    arminarm -d
 
 Connect to it in arm-none-eabi-gdb using:
 
@@ -91,9 +102,9 @@ Put jumpers on the first 2 and last 2 set of pins on the CONN header on the boar
 Uploading firmware
 ==================
 
-Using the 'arminarm' tool to upload firmware with the ST bootloader looks like this:
+Using the 'arminarm' tool to upload firmware with stm32flash looks like this:
 
-    pi@raspberrypi ~ $ arminarm flash myfirmware.bin 
+    pi@raspberrypi ~ $ arminarm -f myfirmware.bin 
     stm32flash 0.4
 
     http://stm32flash.googlecode.com/
@@ -114,9 +125,9 @@ Using the 'arminarm' tool to upload firmware with the ST bootloader looks like t
 
     Starting execution at address 0x08000000... done.
 
-If 'stm32flash' for some reason didn't compile successfully during installation of the toolchain, it will look like this:
+Adding the '-l' flag to use stm32loader.py, it will look like this:
 
-    pi@raspberrypi ~ $ arminarm flash myfirmware.bin 
+    pi@raspberrypi ~ $ arminarm -lf myfirmware.bin 
     GPIO version: 0.5.7
     Pi revision 3
     Open port /dev/ttyAMA0, baud 115200
@@ -138,3 +149,4 @@ If 'stm32flash' for some reason didn't compile successfully during installation 
     cleaning up...
     done.
 
+Run 'arminarm' without any flags, or '-h' will show all options.
