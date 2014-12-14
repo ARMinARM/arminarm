@@ -179,7 +179,7 @@ show_options()
 	echo "Essentials:"
 	echo "	0) Update Self"
 	echo "	1) Update/Install ARMinARM GCC Toolchain"
-	echo "	2) Add /opt/arminarm* to PATH env"
+	echo "	2) Add /opt/arminarm* to PATH env (needs reboot)"
 	echo "	3) Disable serial port (required for ARMinARM board, needs reboot)"
 	echo "	4) Enable serial port (for booting RPI over serial port, default)"
 	echo "	5) Update/Install node.js"
