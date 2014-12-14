@@ -25,7 +25,7 @@ When you run setup, you'll see a menu.
     Essentials:
         0) Update Self
         1) Update/Install ARMinARM GCC Toolchain
-        2) Add /opt/arminarm* to PATH env
+        2) Add /opt/arminarm* to PATH env (needs reboot)
         3) Disable serial port (required for ARMinARM board, needs reboot)
         4) Enable serial port (for booting RPI over serial port, default)
         5) Update/Install node.js
@@ -44,6 +44,7 @@ When you run setup, you'll see a menu.
         g) Update/Install OpenOCD
         h) Update/Install ST-Link
         i) Update/Install dfu-util
+        j) Update/Install stm32flash
     
         q) Quit
     
