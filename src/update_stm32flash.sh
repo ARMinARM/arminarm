@@ -3,7 +3,8 @@
 if [ -d stm32flash ]; then
 	echo "Directory exists: updating"
 	cd stm32flash
-	git pull	
+	make clean
+	git pull
 else
 	echo "First time git clone: installing"
 #	git clone https://gitorious.org/stm32flash/stm32flash.git

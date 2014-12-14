@@ -198,6 +198,7 @@ show_options()
 	echo "	g) Update/Install OpenOCD"
 	echo "	h) Update/Install ST-Link"
 	echo "	i) Update/Install dfu-util"
+	echo "	j) Update/Install stm32flash"
 	echo ""
 	echo "	q) Quit"
 	echo ""
@@ -255,6 +256,8 @@ while [ "$OPTION" != "q" ]; do
 		update_stlink
 	elif [ "$OPTION" == "i" ]; then
 		update_dfu-util
+	elif [ "$OPTION" == "j" ]; then
+		update_stm32flash
 
 	elif [ "$OPTION" == "q" ]; then
 		echo "Bye!"
