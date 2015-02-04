@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ARMINARM=arm-toolchain-bin-2014-06-20-raspbian.tar.gz
+#ARMINARM=arm-toolchain-bin-2015-02-04-raspbian.tar.gz
 URL=https://github.com/ARMinARM/arminarm-bin/raw/master/$ARMINARM
 
 if [ ! -f $ARMINARM ]; then
