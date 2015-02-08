@@ -10,6 +10,8 @@ You'll want to install the following additional packages on Raspbian 2014-06-20 
 
     sudo apt-get install minicom screen autoconf libusb-1.0-0-dev libtool libftdi-dev texinfo
 
+On Raspbian 2015-01-31 or newer you'll want to disable the "Device Tree" by adding 'device_tree=' to the bottom of '/boot/config.txt'. Or run 'sudo raspi-config' and choose '8 Advanced Options' -> 'A5 Device Tree' -> 'No'. You should also do this on older versions of Raspbian that are updated with 'apt-get upgrade'.
+
 Setup and install software for the ARMinARM board by cloning the repository from github, and run setup.
 
     git clone https://github.com/ARMinARM/arminarm
