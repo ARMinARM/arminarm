@@ -7,7 +7,8 @@ if [ "$PROCESSOR" == "BCM2708" ]; then
 	ARMINARM=arm-toolchain-bin-2014-06-20-raspbian.tar.gz
 elif [ "$PROCESSOR" == "BCM2709" ]; then
 	echo "$PROCESSOR found: Pi 2"
-	ARMINARM=arm-toolchain-bin-2015-02-04-raspbian.tar.gz
+	#ARMINARM=arm-toolchain-bin-2015-02-04-raspbian.tar.gz
+	ARMINARM=arm-toolchain-bin-2014-06-20-raspbian.tar.gz
 else
 	echo "unknown processor"
 	ARMINARM=arm-toolchain-bin-2014-06-20-raspbian.tar.gz
