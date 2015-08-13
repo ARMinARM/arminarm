@@ -13,7 +13,7 @@ if [ -d dfu-util ]; then
 	
 else
 	echo "First time git clone: installing"
-	git clone git://gitorious.org/dfu-util/dfu-util.git
+	git clone git://git.code.sf.net/p/dfu-util/dfu-util
 	cd dfu-util
 	./autogen.sh
 	./configure
