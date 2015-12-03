@@ -10,7 +10,7 @@ else
 	cd Espruino
 fi
 
-#last known working version
-#git checkout e1a54f32a8c600b97ecd5705b984018f6c77c5b3
+#release 1v83
+#git checkout aca85851976cc26fb452e867f17975ec0c9dbe8d
 ARMINARM=1 RELEASE=1 make
 cd ..

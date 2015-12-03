@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ESPRUINO=espruino_1v73_ARMinARM.bin
+ESPRUINO=espruino_1v83_ARMinARM.bin
 URL=https://github.com/ARMinARM/arminarm-bin/raw/master/$ESPRUINO
 
 if [ ! -f $ESPRUINO ]; then
