@@ -98,7 +98,7 @@ rpi_serial_console_disable()
 {
 	echo "DISABLE SERIAL"
 	cd scripts
-	sudo ./release_serial.sh disable
+	sudo ./release_serial.sh 1
 	cd ..
 }
 
@@ -106,7 +106,7 @@ rpi_serial_console_enable()
 {
 	echo "ENABLE SERIAL"
 	cd scripts
-	sudo ./release_serial.sh enable
+	sudo ./release_serial.sh 0
 	cd ..
 }
 
@@ -156,7 +156,7 @@ update_toolchain()
 	fi
 
 	sudo cp -r src/tools /opt/arminarm/
-	
+
 	update_stm32flash
 }
 
@@ -164,7 +164,7 @@ update_self()
 {
 	echo "UPDATE SELF"
 	git pull
-	
+
 	sudo cp -r src/tools /opt/arminarm/
 }
 
