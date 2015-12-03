@@ -3,13 +3,10 @@
 #from: https://github.com/asb/raspi-config/blob/master/raspi-config
 
 do_serial() {
-	CURRENT_STATUS="yes" # assume ttyAMA0 output enabled
-	if ! grep -q "^T.*:.*:respawn:.*ttyAMA0" /etc/inittab; then
-		CURRENT_STATUS="no"
+	if [ ! -f /etc/inittab ]; then
+		touch /etc/inittab
 	fi
 
-	#whiptail --yesno "Would you like a login shell to be accessible over serial?" 20 60 2
-	#RET=$?
 	RET=$1
 	if [ $RET -eq 1 ]; then
 		sed -i /etc/inittab -e "s|^.*:.*:respawn:.*ttyAMA0|#&|"
