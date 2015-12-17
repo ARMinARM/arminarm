@@ -21,19 +21,18 @@ When you run setup, you'll see a menu.
     #######################################################################
     #                              ARMinARM                               #
     #######################################################################
-    
+
     Essentials:
         0) Update Self
         1) Update/Install ARMinARM GCC Toolchain
         2) Add /opt/arminarm* to PATH env (needs reboot)
         3) Disable serial port (required for ARMinARM board, needs reboot)
         4) Enable serial port (for booting RPI over serial port, default)
-        5) Update/Install node.js
-    
+
     Fast start:
         10) Upload espruino.bin to ARMinARM board
         11) Upload elua.bin to ARMinARM board
-    
+
     Source code:
         a) Update/Install CMSIS_StdPeriph Examples
         b) Update/Install Espruino source code
@@ -45,9 +44,9 @@ When you run setup, you'll see a menu.
         h) Update/Install ST-Link
         i) Update/Install dfu-util
         j) Update/Install stm32flash
-    
+
         q) Quit
-    
+
     Enter your choice:
 
 You'll want to run the numeric options (0-3) at least once, to install all the basic tools and make the serial port available.
@@ -105,7 +104,7 @@ Uploading firmware
 
 Using the 'arminarm' tool to upload firmware with stm32flash looks like this:
 
-    pi@raspberrypi ~ $ arminarm -f myfirmware.bin 
+    pi@raspberrypi ~ $ arminarm -f myfirmware.bin
     stm32flash 0.4
 
     http://stm32flash.googlecode.com/
@@ -128,7 +127,7 @@ Using the 'arminarm' tool to upload firmware with stm32flash looks like this:
 
 Adding the '-l' flag to use stm32loader.py, it will look like this:
 
-    pi@raspberrypi ~ $ arminarm -lf myfirmware.bin 
+    pi@raspberrypi ~ $ arminarm -lf myfirmware.bin
     GPIO version: 0.5.7
     Pi revision 3
     Open port /dev/ttyAMA0, baud 115200
