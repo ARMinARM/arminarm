@@ -8,7 +8,8 @@ if [ -d stm32flash ]; then
 else
 	echo "First time git clone: installing"
 #	git clone https://gitorious.org/stm32flash/stm32flash.git
-	git clone https://github.com/ARMinARM/stm32flash
+#	git clone https://github.com/ARMinARM/stm32flash
+	git clone git://git.code.sf.net/p/stm32flash/code stm32flash
 	cd stm32flash
 fi
 
