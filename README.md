@@ -1,12 +1,12 @@
 ARMinARM software install scripts
 =================================
 
-The ARMinARM installation scripts assume you're running an up-to-date Raspbian distribution on your Raspberry Pi. Other distributions will probably also work, but you may need to install additional software.
+The ARMinARM installation scripts assume you're running an up-to-date Raspbian Jessie distribution on your Raspberry Pi. Other distributions will probably also work, but you may need to install additional software.
 
     sudo apt-get update
     sudo apt-get upgrade
 
-You'll want to install the following additional packages on Raspbian 2014-06-20 or newer:
+You'll want to install the following additional packages on Raspbian Jessie 2015-11-21 or newer:
 
     sudo apt-get install minicom screen autoconf libusb-1.0-0-dev libtool libftdi-dev texinfo
 
@@ -24,7 +24,7 @@ When you run setup, you'll see a menu.
 
     Essentials:
         0) Update Self
-        1) Update/Install ARMinARM GCC Toolchain
+        1) Update/Install ARMinARM + GCC Toolchain
         2) Add /opt/arminarm* to PATH env (needs reboot)
         3) Disable serial port (required for ARMinARM board, needs reboot)
         4) Enable serial port (for booting RPI over serial port, default)
@@ -56,15 +56,13 @@ The alfabetic options (a-j) installs optional tools, frameworks or projects. Ins
 Toolchain (arm-none-eabi-gcc)
 =============================
 
-The arm-none-eabi-gcc toolchain is installed in /opt/arminarm/. This toolchain is optimized to compile code for ARM Cortex M0/M1/M3/M4 microcontrollers with thumb, thumb2, and FPU hard float (M4) instructions.
+Since Raspbian Jessie, the toolchain that's installed is arm-none-eabi-gcc from the standard Jessie repositories (gcc, gdb, binutils, newlib). This is recommended.
 
-The scripts that were used to build the toolchain are based on Yagarto, and can be found here: [arm-toolchain-build-scripts](https://github.com/ARMinARM/arm-toolchain-build-scripts)
-
-The toolchain compiles firmware for the STM32 on the ARMinARM board, but it should also work for boards from other manufacturers. If the board has an ARM Cortex-M chip (STM32, NXP, Atmel, TI etc.), it'll probably compile. YMMV.
+If you must use Wheezy, run `install_toolchain.sh` in the `bin` directory manually in stead of installing the toolchain from the setup menu.
 
 Tools
 =====
-A set of tools for uploading firmware to the STM32 on the ARMinARM board come with the toolchain. The tool 'arminarm' is automatically installed to /opt/arminarm/tools when you install the toolchain from the 'setup' menu. It uses the default bootloader that's available on every STM32 chip.
+A set of tools for uploading firmware to the STM32 on the ARMinARM board come with the toolchain. The tool 'arminarm' is automatically installed to /opt/arminarm when you install the toolchain from the 'setup' menu. It uses the default bootloader that's available on every STM32 chip.
 
 Under the hood, communicating with the bootloader is done with one of two tools: [stm32flash](https://code.google.com/p/stm32flash/), or a modified [stm32loader.py](https://github.com/jsnyder/stm32loader). They both work well, but you may find stm32flash has a somewhat cleaner interface, and handles errors a little better. The default is to use stm32flash. When adding the -l flag, stm32loader.py is used.
 

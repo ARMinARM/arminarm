@@ -136,11 +136,33 @@ upload_elua()
 	cd ..
 }
 
-update_toolchain()
+update_toolchain_jessie()
 {
 #	update_self
 
 	echo "UPDATE TOOLCHAIN"
+	if [ -d /opt/arminarm ]; then
+		echo "Directory exists: updating"
+	fi
+
+	#binutils-arm-none-eabi - GNU assembler, linker and binary utilities for ARM Cortex-A/R/M processors
+	#gcc-arm-none-eabi - GCC cross compiler for ARM Cortex-A/R/M processors
+	#gdb-arm-none-eabi - GNU debugger for ARM Cortex-A/R/M processors
+	#libnewlib-arm-none-eabi - C library and math library compiled for bare metal using Cortex A/R/M
+	#libstdc++-arm-none-eabi-newlib - GNU Standard C++ Library v3 for ARM Cortex-A/R/M processors (newlib)
+
+	sudo apt-get install -y binutils-arm-none-eabi gcc-arm-none-eabi gdb-arm-none-eabi libnewlib-arm-none-eabi libstdc++-arm-none-eabi-newlib
+
+	sudo cp -r src/tools/* /opt/arminarm/
+
+	update_stm32flash
+}
+
+update_toolchain()
+{
+#	update_self
+
+	echo "UPDATE TOOLCHAIN WHEEZY"
 	if [ -d /opt/arminarm ]; then
 		echo "Directory exists: updating"
 	fi
@@ -178,7 +200,7 @@ show_options()
 	echo ""
 	echo "Essentials:"
 	echo "	0) Update Self"
-	echo "	1) Update/Install ARMinARM GCC Toolchain"
+	echo "	1) Update/Install ARMinARM + GCC Toolchain"
 	echo "	2) Add /opt/arminarm* to PATH env (needs reboot)"
 	echo "	3) Disable serial port (required for ARMinARM board, needs reboot)"
 	echo "	4) Enable serial port (for booting RPI over serial port, default)"
@@ -219,7 +241,8 @@ while [ "$OPTION" != "q" ]; do
 		OPTION="q"
 		echo "Updated. Please run setup again."
 	elif [ "$OPTION" == "1" ]; then
-		update_toolchain
+		#update_toolchain
+		update_toolchain_jessie
 	elif [ "$OPTION" == "2" ]; then
 		path_env
 	elif [ "$OPTION" == "3" ]; then

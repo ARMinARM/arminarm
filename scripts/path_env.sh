@@ -10,6 +10,6 @@ if [ -f .bashrc.bak ]; then
   echo $PATH
 else
   cp -a .bashrc .bashrc.bak
-  echo "PATH=\$PATH:/opt/arminarm/bin:/opt/arminarm/tools" >> .bashrc
+  echo "PATH=\$PATH:/opt/arminarm" >> .bashrc
   echo $PATH
 fi
