@@ -7,7 +7,7 @@ TOOL="stm32flash"
 PORT=/dev/ttyAMA0
 BAUD=115200
 STM32FLASH=/usr/local/bin/stm32flash
-STM32LOADER=/opt/arminarm/tools/stm32loader.py
+STM32LOADER=/opt/arminarm/stm32loader.py
 
 usage()
 {
@@ -85,7 +85,7 @@ if [ "$CMD" == "reset" ]; then
 	else
 		echo "reset using stm32loader"
 		sudo $STM32LOADER -p $PORT -t
-	fi	
+	fi
 elif [ "$CMD" == "bootloader" ]; then
 	if [ "$TOOL" == "stm32flash" ]; then
 		echo "reset to bootloader using stm32flash"
@@ -93,7 +93,7 @@ elif [ "$CMD" == "bootloader" ]; then
 	else
 		echo "reset to bootloader using stm32loader"
 		sudo $STM32LOADER -p $PORT -o
-	fi	
+	fi
 elif [ "$CMD" == "flash" ]; then
 	if [ "$TOOL" == "stm32flash" ]; then
 		echo "flashing $FILE using stm32flash"
@@ -101,7 +101,7 @@ elif [ "$CMD" == "flash" ]; then
 	else
 		echo "flashing $FILE using stm32loader"
 		sudo $STM32LOADER -p $PORT -e -v -w $FILE
-	fi	
+	fi
 elif [ "$CMD" == "openocd" ]; then
 	sudo openocd -s /usr/share/openocd/scripts -f /opt/arminarm/tools/arminarm.tcl
 elif [ "$CMD" == "help" ]; then
@@ -113,6 +113,6 @@ else
 	echo TOOL = "${TOOL}"
 	echo FILE = "${FILE}"
 	echo ""
-	
+
 	usage
 fi

@@ -153,6 +153,7 @@ update_toolchain_jessie()
 
 	sudo apt-get install -y binutils-arm-none-eabi gcc-arm-none-eabi gdb-arm-none-eabi libnewlib-arm-none-eabi libstdc++-arm-none-eabi-newlib
 
+	sudo mkdir -p /opt/arminarm
 	sudo cp -r src/tools/* /opt/arminarm/
 
 	update_stm32flash
